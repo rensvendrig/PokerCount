@@ -1,3 +1,4 @@
+import streamlit as st
 def calculate_winners(players_info, chip_values):
     winners = {}
     sum_buy_in = 0
@@ -32,7 +33,8 @@ def distribute_losses(players):
 
             payment = min(players[winner], loss * -1)
             players[winner] -= payment
-            payments[(loser,'betaalt', winner)] = round(payment, 2)
+            key_pay = loser +' betaalt ' + winner
+            payments[key_pay] = round(payment, 2)
             total_losses -= payment
             loss += payment
 
@@ -44,14 +46,14 @@ def distribute_losses(players):
     return pay_wout_zeros
 
 
-chip_values = [0.05, 0.1, 0.2, 0.4, 1.0]
+# chip_values = [0.05, 0.1, 0.2, 0.4, 1.0]
 
-players = [{"name": "Bram", "buy_in": 10, "end_score": [21,3,4,3,4]},
-           {"name": "Lukas", "buy_in": 10, "end_score": [21,22,12,15,4]},
-           {"name": "Rens", "buy_in": 10, "end_score": [8, 20, 11, 6, 5]},
-            {"name": "Brandt", "buy_in": 10, "end_score": [16, 4, 17, 9, 3]},
-           {"name": "Mojet", "buy_in": 10, "end_score": [2, 7, 10, 0, 1]}]
+# players = [{"name": "Bram", "buy_in": 10, "end_score": [21,3,4,3,4]},
+#            {"name": "Lukas", "buy_in": 10, "end_score": [21,22,12,15,4]},
+#            {"name": "Rens", "buy_in": 10, "end_score": [8, 20, 11, 6, 5]},
+#             {"name": "Brandt", "buy_in": 10, "end_score": [16, 4, 17, 9, 3]},
+#            {"name": "Mojet", "buy_in": 10, "end_score": [2, 7, 10, 0, 1]}]
 
-winnings_losses = calculate_winners(players, chip_values)
-print(winnings_losses)
-distribute_losses(winnings_losses)
+# winnings_losses = calculate_winners(players, chip_values)
+# print(winnings_losses)
+# distribute_losses(winnings_losses)
